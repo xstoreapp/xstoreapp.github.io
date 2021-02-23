@@ -1,0 +1,23 @@
+.menu {
+    width: 100%;
+    height: 3em;
+    padding: 0.25em;
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+}
+.menu a {
+    padding: 0 0.25em;
+    border-radius: 0.25em;
+    margin-right: 0.25em;
+    color: white;
+    background-color: gray;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.menu a:hover, .menu a:focus {
+    color: lightcoral;
+    background-color: #333333;
+}
