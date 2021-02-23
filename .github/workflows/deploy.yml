@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: yarn
-      - run: yarn global add gh-pages --prefix /usr/local
+      - run: npm i gh-pages -g
       - run: yarn build
       - run: yarn export
       - run: gh-pages -d out/
