@@ -1,6 +1,6 @@
 import styles from '../styles/Menu.module.css'
 
-function Menu(props) {
+function Menu() {
     return <div className={styles.menu}>
         <a href="/" style={{width: `${40}px`, backgroundColor: 'black'}}>
             <img src="/icon.svg" style={{maxHeight: `${100}%`, width: `${31}px`}} />

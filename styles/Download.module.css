@@ -1,0 +1,9 @@
+.main {
+    display: flex;
+    justify-content: center;
+}
+.cardList {
+    display: flex;
+    flex-direction: row;
+    height: 20em;
+}
