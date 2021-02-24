@@ -11,7 +11,6 @@
     border-radius: 0.25em;
     margin-right: 0.25em;
     color: white;
-    background-color: gray;
     display: flex;
     justify-items: center;
     align-items: center;
@@ -19,5 +18,4 @@
 }
 .menu a:hover, .menu a:focus {
     color: lightcoral;
-    background-color: #333333;
 }
