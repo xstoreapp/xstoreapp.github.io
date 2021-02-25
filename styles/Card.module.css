@@ -8,10 +8,12 @@
     justify-content: center;
     align-items: center;
     border-radius: 1em;
+    border: 1px solid rgb(224, 224, 224);
 }
 .card:hover, .card:focus {
     background-color: rgba(219, 219, 219, 0.356);
     cursor: pointer;
+    border: 1px solid gray;
 }
 .card:hover h2, .card:focus h2 {
     color: lightcoral;
