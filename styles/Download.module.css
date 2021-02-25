@@ -1,6 +1,7 @@
 .main {
     display: flex;
     justify-content: center;
+    padding: 2em 8em;
 }
 .cardList {
     display: flex;
