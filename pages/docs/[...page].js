@@ -1,5 +1,7 @@
+import md from 'marked'
+
 const Page = ({ dangerouslySetInnerHTML }) => {
-    return <div style={{whiteSpace: 'pre-wrap'}}>{dangerouslySetInnerHTML}</div>
+    return <div style={{whiteSpace: 'pre-wrap'}} dangerouslySetInnerHTML={dangerouslySetInnerHTML}></div>
 }
 
 Page.getInitialProps = async (ctx) => {
@@ -10,7 +12,9 @@ Page.getInitialProps = async (ctx) => {
     // This way we don't need SSR, the website can be static, open, and it doesn't
     // need file operations.
     const readOperation = await fetch(`http://localhost:3000/staticDocs${fullRoute}.md`)
-    return { dangerouslySetInnerHTML: await readOperation.text() }
+    const text = await readOperation.text()
+    const markdown = {__html: md(text)}
+    return { dangerouslySetInnerHTML: markdown }
 }
 
 export default Page
