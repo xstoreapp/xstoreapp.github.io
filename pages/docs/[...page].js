@@ -1,5 +1,5 @@
 const Page = ({ dangerouslySetInnerHTML }) => {
-    return <div>{dangerouslySetInnerHTML}</div>
+    return <div style={{whiteSpace: 'pre-wrap'}}>{dangerouslySetInnerHTML}</div>
 }
 
 Page.getInitialProps = async (ctx) => {
