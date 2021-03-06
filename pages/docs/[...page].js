@@ -1,7 +1,5 @@
-import { useRouter } from 'next/router'
-
 const Page = ({ dangerouslySetInnerHTML }) => {
-    return <p>{dangerouslySetInnerHTML}</p>
+    return <div>{dangerouslySetInnerHTML}</div>
 }
 
 Page.getInitialProps = async (ctx) => {
@@ -11,8 +9,8 @@ Page.getInitialProps = async (ctx) => {
     // statically.
     // This way we don't need SSR, the website can be static, open, and it doesn't
     // need file operations.
-    const readOperation = await fetch(`http://localhost:3000/staticDocs/${fullRoute}.md`)
-    return { dangerouslySetInnerHTML: readOperation }
+    const readOperation = await fetch(`http://localhost:3000/staticDocs${fullRoute}.md`)
+    return { dangerouslySetInnerHTML: await readOperation.text() }
 }
 
 export default Page
