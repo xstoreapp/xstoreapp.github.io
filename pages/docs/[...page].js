@@ -1,7 +1,18 @@
+import { useEffect } from 'react'
 import md from 'marked'
+import styles from '../../styles/Docs.module.css'
 
-const Page = ({ dangerouslySetInnerHTML }) => {
-    return <div style={{whiteSpace: 'pre-wrap'}} dangerouslySetInnerHTML={dangerouslySetInnerHTML}></div>
+const Page = ({ dangerouslySetInnerHTML, fullRoute }) => {
+    return <div className={styles.docsView}>
+        <div className={styles.leftSideNav}>
+            <a href="/docs/welcome">Welcome</a>
+        </div>
+        <div>
+            <a href={`/staticDocs${fullRoute}.md`}>Markdown source</a>
+            <div className={styles.markdownView} style={{whiteSpace: 'pre-wrap'}}
+            dangerouslySetInnerHTML={dangerouslySetInnerHTML}></div>
+        </div>
+    </div>
 }
 
 Page.getInitialProps = async (ctx) => {
@@ -14,7 +25,7 @@ Page.getInitialProps = async (ctx) => {
     const readOperation = await fetch(`http://localhost:3000/staticDocs${fullRoute}.md`)
     const text = await readOperation.text()
     const markdown = {__html: md(text)}
-    return { dangerouslySetInnerHTML: markdown }
+    return { dangerouslySetInnerHTML: markdown, fullRoute }
 }
 
 export default Page

@@ -1,0 +1,21 @@
+.leftSideNav {
+    background-color: rgb(221, 221, 221);
+    margin-right: 2em;
+}
+.leftSideNav a {
+    width: 100% !important;
+    height: 5em !important;
+    background-color: transparent !important;
+    color: blue !important;
+    text-align: center !important;
+}
+.docsView {
+    display: grid;
+    grid-template-columns: 20em 1fr;
+    grid-template-rows: 1fr;
+    height: calc(100vh - 48px);
+}
+.docsView a {
+    color: gray;
+    text-decoration: underline currentColor;
+}
