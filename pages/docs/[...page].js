@@ -2,10 +2,21 @@ import { useEffect } from 'react'
 import md from 'marked'
 import styles from '../../styles/Docs.module.css'
 
-const Page = ({ dangerouslySetInnerHTML, fullRoute }) => {
+const routes = [
+    {
+        route: '/docs/welcome',
+        simplified: 'Welcome'
+    }
+]
+
+const Page = ({ dangerouslySetInnerHTML }) => {
     return <div className={styles.docsView}>
         <div className={styles.leftSideNav}>
-            <a href="/docs/welcome">Welcome</a>
+            {
+                routes.map((val, index, arr) => {
+                    return <a href={val.route}>{val.simplified}</a>
+                })
+            }
         </div>
         <div>
             <a href={`/staticDocs${fullRoute}.md`}>Markdown source</a>
@@ -15,18 +26,27 @@ const Page = ({ dangerouslySetInnerHTML, fullRoute }) => {
     </div>
 }
 
-Page.getInitialProps = async (ctx) => {
-    const { page } = ctx.query
-    const { req } = ctx
-    const fullRoute = typeof page == 'array' ? `${page.join("/")}` : `/${page}`
+export default Page
+
+export const getStaticProps = async() => {
+    const { readdir, readFile } = require('fs/promises')
     // Fetch to this website, to a public folder called public/docs that is served
     // statically.
     // This way we don't need SSR, the website can be static, open, and it doesn't
     // need file operations.
-    const readOperation = await fetch(`http://${req.headers.host}/staticDocs${fullRoute}.md`)
-    const text = await readOperation.text()
-    const markdown = {__html: md(text)}
-    return { dangerouslySetInnerHTML: markdown, fullRoute }
+    const dirs = await readdir(process.cwd() + '/public/staticDocs')
+    dirs.map(async(val, index, arr) => {
+        const readOperation = await readFile(process.cwd() + `/public/staticDocs/${val}`)
+        const markdown = {__html: md(readOperation.toString())}
+        return { props: { dangerouslySetInnerHTML: markdown } }
+    })
 }
 
-export default Page
+export const getStaticPaths = () => {
+    let rtsOnlyRoute = []
+    for (let index = 0; index < routes.length; index++) {
+        const element = routes[index].route;
+        rtsOnlyRoute = [...rtsOnlyRoute, element]
+    }
+    return { paths: rtsOnlyRoute, fallback: false }
+}
