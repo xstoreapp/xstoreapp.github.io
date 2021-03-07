@@ -1,0 +1,20 @@
+name: Deploy CI
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Checkout
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn
+      - run: yarn add gh-pages
+      - run: yarn build
+      - run: yarn export
+      - run: git config user.email "action@github.com"
+      - run: git config user.name "GitHub Action"
+      - run: npx gh-pages -d out/
