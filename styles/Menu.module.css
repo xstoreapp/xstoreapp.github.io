@@ -4,7 +4,7 @@
     padding: 0.25em;
     display: flex;
     flex-direction: row;
-    background-color: black;
+    background-color: #5552FF;
 }
 .menu a {
     padding: 0 0.25em;
@@ -17,5 +17,5 @@
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .menu a:hover, .menu a:focus {
-    color: deeppink;
+    color: black;
 }
